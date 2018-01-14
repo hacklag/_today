@@ -1,0 +1,95 @@
+name: events
+description: Description of events
+version: 0.0.1
+
+classes:
+  user:
+    - name: givenName
+      type: string
+    - name: familyName
+      type: string
+    - name: image
+      type: file
+
+  organization:
+    - name: name
+      type: string
+    - name: description
+      type: text
+  place:
+    - name: name
+      type: string
+    - name: address
+      type: object
+  event:
+    - name: name
+      type: string
+    - name: location
+      type: reference
+      target: place
+    - name: sponsor
+      type: reference
+      target: place
+    - name: performers
+      type: relation
+      target: user
+    - name: startDate
+      type: datetime
+    - name: endDate
+      type: datetime
+    - name: about
+      type: text
+    - name: inLanguage
+      type: string
+    - name: image
+      type: file
+    - name: attendees
+      type: relation
+      target: user
+
+
+endpoints:
+  add:
+    description: Add event
+    parameters:
+      name:
+        description: Event name
+        example: Meet JS
+      location:
+        type: integer
+        description: Location ID
+        example: 1
+      sponsor:
+        type: integer
+        description: Sponsor ID
+        example: 1
+      startDate:
+        description: Start date (UTC format - ISO string)
+        example: 2018-01-14T21:30:11.557Z
+      endDate:
+        description: End date (UTC format - ISO string)
+        example: 2018-01-14T21:30:11.557Z
+      about:
+        description: Event description
+        example: This ivent is dediated to...
+      inLanguage:
+        description: Language of the event
+        example: en
+      image:
+        type: file
+        description: Image of the event
+
+    response:
+      success:
+        description: Success
+        example: |
+          {
+            "message": "Event added successfuly!"
+          }
+      fail:
+        exit_code: 400
+        description: Failed
+        example: |
+          {
+            "message": "Error while adding event!"
+          }
