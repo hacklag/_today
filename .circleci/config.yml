@@ -29,11 +29,11 @@ jobs:
       - run:
           name: yarn
           command: yarn
-          working_directory: ~/repo/web/
+          working_directory: ~/repo/app/
       - run:
           name: Build
           command: yarn build
-          working_directory: ~/repo/web/
+          working_directory: ~/repo/app/
       - run: s deploy
       - run: s hosting sync app
 
