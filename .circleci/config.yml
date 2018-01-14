@@ -24,7 +24,6 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run: sudo npm install -g create-react-app
       - run: sudo npm install -g syncano-cli@beta
       - run:
           name: yarn
@@ -33,7 +32,7 @@ jobs:
       - run:
           name: Build
           command: yarn build
-          working_directory: ~/repo/app/
+          working_directory: ~/repo/app /
       - run: s deploy
       - run: s hosting sync app
 
